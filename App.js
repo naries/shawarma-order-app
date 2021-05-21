@@ -14,12 +14,16 @@ import ContactUs from './screens/ContactUs'
 
 //import fonts
 import { useFonts } from 'expo-font'
+import ViewOrders from './screens/ViewOrders';
+import PlaceOrder from './screens/PlaceOrder';
 
 const Stack = createStackNavigator();
 
 export default function App() {
   let [fontsLoaded] = useFonts({
     Pattaya: require('./assets/Pattaya-Regular.ttf'),
+    Firasans: require('./assets/FiraSans-Regular.ttf'),
+    Janda: require('./assets/JandaManateeBubble.ttf')
   })
 
   if(!fontsLoaded){
@@ -27,21 +31,21 @@ export default function App() {
   }
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions = {({navigation}) => ({
+      <Stack.Navigator screenOptions = {({route, navigation}) => ({
           headerLeft: () => (<TouchableWithoutFeedback onPress={() => navigation.navigate('contact')}>
             <Text style={{textAlign: 'center', paddingHorizontal: 20}}>
-            <IoniconIcon name="call" size={25} color='#333' solid/>
+            <IoniconIcon name="call" size={route.name==="contact"?40:25} color={route.name=== "contact" ? '#17B169':'#333'} solid/>
           </Text>
           </TouchableWithoutFeedback>),
           headerTitle: () => (<TouchableWithoutFeedback onPress={() => navigation.navigate('home')}>
             <Text style={{textAlign: 'center'}}>
-              <IoniconIcon name="fast-food" size={40} color="orange" />
+              <IoniconIcon name="fast-food" size={route.name==="home"?40:25} color={route.name === "home" ? '#FEBE10':'#333'} />
             </Text>
           </TouchableWithoutFeedback>
           ),
-          headerRight: () => (<TouchableWithoutFeedback>
+          headerRight: () => (<TouchableWithoutFeedback onPress = {() => navigation.navigate('orders')}>
               <Text style={{textAlign: 'center', paddingHorizontal: 20}}>
-              <FeatherIcon name="shopping-cart" size={25} color="#333" />
+              <FeatherIcon name="shopping-cart" size={route.name==="orders"?40:25} color={route.name === "orders" ? '#0066b2':'#333'} />
               </Text>
             </TouchableWithoutFeedback>
           ),
@@ -60,6 +64,14 @@ export default function App() {
         <Stack.Screen 
           name="contact"
           component={ContactUs}
+        />
+        <Stack.Screen 
+          name="orders"
+          component={ViewOrders}
+        />
+        <Stack.Screen
+          name="place"
+          component={PlaceOrder}
         />
       </Stack.Navigator>
     </NavigationContainer>

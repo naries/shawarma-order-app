@@ -1,8 +1,9 @@
 import React from 'react';
-import { Image, ScrollView, View, Text, StyleSheet } from 'react-native';
+import { Image, ScrollView, View, Text, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components';
 import CenterImage from '../assets/chnch.png'
 import CenterImage1 from '../assets/shawarma.png'
+import CenterImage2 from '../assets/sandwich.png'
 import { windowWidth } from '../utils/dimensions'
 import Swiper from 'react-native-swiper'
 
@@ -91,11 +92,12 @@ const Bubble3 = styled(Bubble)`
     backgroundColor: #accc2e;
     transform: translateX(120px);
 `
-const Orders = () => {
+const Orders = ({ navigation }) => {
     return (
             <Container>
                 <Swiper horizontal showsButtons={false} style={styles.wrapper}>
                     <View style={styles.slide1}>
+                        <TouchableWithoutFeedback onPress={() => navigation.push('place')}>
                         <SpatialView>
                             <TopicText>Let's eat<Red>.</Red><Green>.</Green><Orange>.</Orange></TopicText>
                             <BorderedView>
@@ -106,7 +108,6 @@ const Orders = () => {
                                     <TopicText style={{fontSize: 30}}>
                                         Shawarma
                                     </TopicText>
-
                                     <TopicText style={{fontSize: 20, color: '#666', marginTop: 20}}>
                                         ₦ 1000
                                     </TopicText>
@@ -115,8 +116,9 @@ const Orders = () => {
                                 <Bubble3></Bubble3>
                             </BorderedView>
                         </SpatialView>
+                        </TouchableWithoutFeedback>
                         <CView>
-                            <Text style={{fontSize: 16, color: '#666'}}>Tap on any to place order</Text>
+                            <Text style={{fontSize: 16, color: '#666'}}>Tap anywhere to place order</Text>
                         </CView>
                     </View>
                     <View style={styles.slide2}>
@@ -147,8 +149,19 @@ const Orders = () => {
                         <SpatialView>
                             <TopicText>Let's eat<Red>.</Red><Green>.</Green><Orange>.</Orange></TopicText>
                             <BorderedView>
-                                <View style={[styles.triangle, {backgroundColor: '#cbd2f7'}]}></View>
-                                <Image source={CenterImage} style={centerImageProperties} />
+                                <View style={[styles.triangle, {backgroundColor: '#cbd2f7'}]}>    
+                                </View>
+                                <Image source={CenterImage2} style={centerImageProperties} />
+                                <View style={{position: 'absolute', bottom: 100, width: '100%',justifyContent: 'center'}}>
+                                    <TopicText style={{fontSize: 30}}>
+                                        Sandwich
+                                    </TopicText>
+                                    <TopicText style={{fontSize: 20, color: '#666', marginTop: 20}}>
+                                        ₦ 700
+                                    </TopicText>
+                                </View>
+                                <Bubble2></Bubble2>
+                                <Bubble3></Bubble3>
                             </BorderedView>
                         </SpatialView>
                         <CView>
@@ -193,8 +206,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 50,
     right: 50,
-    borderWidth: 1,
-    borderColor: '#fddde1',
+    borderColor: 'white',
+    borderWidth: .495,
     borderRadius: 40,
   }
 })

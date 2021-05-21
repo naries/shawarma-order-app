@@ -5,7 +5,7 @@ const ViewOrders = ({
     params,
 }) => (
     <View>
-        <Text>ViewOrders</Text>
+        <Text>Daniel's Shawarma</Text>
     </View>
 );
 
